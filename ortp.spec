@@ -63,7 +63,9 @@ Statyczna biblioteka ortp.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -81,6 +83,7 @@ rm -fr $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/*.la
 %{_includedir}/ortp
+# XXX: use %{_gtkdocdir}
 %{_datadir}/gtk-doc/html/ortp
 
 %files static
