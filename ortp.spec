@@ -58,7 +58,8 @@ Statyczna biblioteka ortp.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-gtk-doc
+	--disable-gtk-doc \
+	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
 %install
@@ -83,8 +84,7 @@ rm -fr $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/*.la
 %{_includedir}/ortp
-# XXX: use %{_gtkdocdir}
-%{_datadir}/gtk-doc/html/ortp
+%{_gtkdocdir}/ortp
 
 %files static
 %defattr(644,root,root,755)
