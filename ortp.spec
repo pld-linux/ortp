@@ -3,12 +3,12 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl):	Biblioteka obs³uguj±ca protokó³ RTP/RTCP
 Name:		ortp
-Version:	0.6.3
+Version:	0.7.0
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.linphone.org/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	873fa786fc3addeca3b9a686feab613f
+# Source0-md5:	4a8e1873e15b076698a82d5249e3992d
 URL:		http://www.linphone.org/ortp/
 BuildRequires:	autoconf
 BuildRequires:	automake
