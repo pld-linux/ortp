@@ -17,6 +17,8 @@ BuildRequires:	gtk-doc
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define specflags -fno-strict-aliasing
+
 %description
 ortp is a library for handling RTP/RTCP packets. (See RFC 1889 and
 1890 for more information about the protocol)
