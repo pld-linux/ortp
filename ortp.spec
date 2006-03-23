@@ -3,12 +3,12 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl):	Biblioteka obs³uguj±ca protokó³ RTP/RTCP
 Name:		ortp
-Version:	0.8.1
+Version:	0.9.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.linphone.org/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	5d8a8da638aec3a80214d64e0c7929af
+# Source0-md5:	5c368acbbdbb6cf537307cb1493e4584
 URL:		http://www.linphone.org/ortp/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -58,7 +58,6 @@ Statyczna biblioteka ortp.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
