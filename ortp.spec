@@ -1,7 +1,7 @@
 # TODO:
 # 	- fix gtk-doc
 Summary:	RTP/RTCP protocol library
-Summary(pl):	Biblioteka obs³uguj±ca protokó³ RTP/RTCP
+Summary(pl.UTF-8):   Biblioteka obsÅ‚ugujÄ…ca protokÃ³Å‚ RTP/RTCP
 Name:		ortp
 Version:	0.11.0
 Release:	1
@@ -23,32 +23,32 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 ortp is a library for handling RTP/RTCP packets. (See RFC 1889 and
 1890 for more information about the protocol)
 
-%description -l pl
-ortp to biblioteka obs³uguj±ca pakiety RTP/RTCP. Wiêcej informacji o
-protokole znajduje siê w RFC 1889 i 1890.
+%description -l pl.UTF-8
+ortp to biblioteka obsÅ‚ugujÄ…ca pakiety RTP/RTCP. WiÄ™cej informacji o
+protokole znajduje siÄ™ w RFC 1889 i 1890.
 
 %package devel
 Summary:	Header files to develop applications using ortp
-Summary(pl):	Pliki nag³ówkowe do tworzenia aplikacji u¿ywaj±cych ortp
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe do tworzenia aplikacji uÅ¼ywajÄ…cych ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for the ortp library.
 
-%description devel -l pl
-Pliki nag³ówkowe dla biblioteki ortp.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe dla biblioteki ortp.
 
 %package static
 Summary:	Static ortp library
-Summary(pl):	Statyczna biblioteka ortp
+Summary(pl.UTF-8):   Statyczna biblioteka ortp
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static ortp library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka ortp.
 
 %prep
