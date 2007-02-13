@@ -1,7 +1,7 @@
 # TODO:
 # 	- fix gtk-doc
 Summary:	RTP/RTCP protocol library
-Summary(pl.UTF-8):   Biblioteka obsługująca protokół RTP/RTCP
+Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
 Version:	0.11.0
 Release:	1
@@ -29,7 +29,7 @@ protokole znajduje się w RFC 1889 i 1890.
 
 %package devel
 Summary:	Header files to develop applications using ortp
-Summary(pl.UTF-8):   Pliki nagłówkowe do tworzenia aplikacji używających ortp
+Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -41,7 +41,7 @@ Pliki nagłówkowe dla biblioteki ortp.
 
 %package static
 Summary:	Static ortp library
-Summary(pl.UTF-8):   Statyczna biblioteka ortp
+Summary(pl.UTF-8):	Statyczna biblioteka ortp
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
