@@ -1,9 +1,5 @@
 # TODO:
 # 	- fix gtk-doc
-# - sparc fails:
-#stun.c: In function `stunRand':
-#stun.c:762: warning: implicit declaration of function `gethrtime'
-#make[3]: *** [stun.lo] Error 1
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
@@ -13,15 +9,15 @@ License:	LGPL
 Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
 # Source0-md5:	c2595b0caf99f922946fcb16e3250787
+Patch0:		%{name}-sparc.patch
 URL:		http://www.linphone.org/index.php/v2/code_review/ortp
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	gtk-doc
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define specflags -fno-strict-aliasing
+%define		specflags	-fno-strict-aliasing
 
 %description
 ortp is a library for handling RTP/RTCP packets. (See RFC 1889 and
@@ -57,6 +53,7 @@ Statyczna biblioteka ortp.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -82,16 +79,16 @@ rm -fr $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README NEWS AUTHORS ChangeLog
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libortp.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/libortp.so
+%{_libdir}/libortp.la
 %{_includedir}/ortp
+%{_pkgconfigdir}/ortp.pc
 %{_gtkdocdir}/ortp
-%{_pkgconfigdir}/*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libortp.a
