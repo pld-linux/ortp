@@ -1,5 +1,9 @@
 # TODO:
 # 	- fix gtk-doc
+# - sparc fails:
+#stun.c: In function `stunRand':
+#stun.c:762: warning: implicit declaration of function `gethrtime'
+#make[3]: *** [stun.lo] Error 1
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
