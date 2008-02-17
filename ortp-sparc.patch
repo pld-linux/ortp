@@ -1,0 +1,11 @@
+--- ortp-0.11.0/src/stun.c.orig	2006-09-12 19:21:29.000000000 +0000
++++ ortp-0.11.0/src/stun.c	2007-05-16 22:10:01.627522569 +0000
+@@ -758,7 +758,7 @@
+       asm("rdtsc" : "=A" (tick));
+ #elif defined(__GNUC__) && defined(__amd64__)
+       asm("rdtsc" : "=A" (tick));
+-#elif defined (__SUNPRO_CC) || defined( __sparc__ )	
++#elif defined (__SUNPRO_CC) && defined( __sparc__ )
+       tick = gethrtime();
+ #elif defined(__MACH__) 
+       {
