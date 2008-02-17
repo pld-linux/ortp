@@ -1,0 +1,11 @@
+--- ortp-0.13.1/src/stun.c.orig	2007-03-11 21:13:36.000000000 +0100
++++ ortp-0.13.1/src/stun.c	2008-02-17 22:00:38.358282506 +0100
+@@ -756,7 +756,7 @@
+       tick <<= 32;
+       tick |= lowtick;
+       }
+-#elif defined(__GNUC__) && ( defined(__i686__) || defined(__i386__) )
++#elif defined(__GNUC__) && ( defined(__i686__) || defined(__i586__) || defined(__pentium4__) || defined(__athlon__) )
+       asm("rdtsc" : "=A" (tick));
+ #elif defined(__GNUC__) && defined(__amd64__)
+       asm("rdtsc" : "=A" (tick));
