@@ -1,19 +1,15 @@
-# TODO:
-# 	- fix gtk-doc
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.11.0
+Version:	0.13.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	c2595b0caf99f922946fcb16e3250787
-Patch0:		%{name}-sparc.patch
-URL:		http://www.linphone.org/index.php/v2/code_review/ortp
+# Source0-md5:	293f16da6dd434e68652f0f725b7f97c
+URL:		http://www.linphone.org/index.php/eng/code_review/ortp
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	gtk-doc
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -53,7 +49,6 @@ Statyczna biblioteka ortp.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -61,7 +56,12 @@ Statyczna biblioteka ortp.
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-html-dir=%{_gtkdocdir}
+%if "%{_lib}" == "lib64"
+	--enable-mode64bit=yes \
+%else
+	--enable-mode64bit=no \
+%endif
+	--enable-ipv6
 %{__make}
 
 %install
@@ -69,6 +69,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -r $RPM_BUILD_ROOT%{_datadir}/doc/ortp/html
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -78,7 +80,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS AUTHORS ChangeLog
+%doc README NEWS AUTHORS ChangeLog doc/html
 %attr(755,root,root) %{_libdir}/libortp.so.*.*
 
 %files devel
@@ -87,7 +89,6 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libortp.la
 %{_includedir}/ortp
 %{_pkgconfigdir}/ortp.pc
-%{_gtkdocdir}/ortp
 
 %files static
 %defattr(644,root,root,755)
