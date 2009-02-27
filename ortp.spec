@@ -1,12 +1,12 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.13.1
-Release:	2
+Version:	0.15.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	293f16da6dd434e68652f0f725b7f97c
+# Source0-md5:	caa6bebf049629cdc05ef34b9d4ee5e1
 Patch0:		%{name}-i486.patch
 URL:		http://www.linphone.org/index.php/eng/code_review/ortp
 BuildRequires:	autoconf >= 2.50
@@ -72,8 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/doc/ortp/html
-
 %clean
 rm -fr $RPM_BUILD_ROOT
 
@@ -84,7 +82,7 @@ rm -fr $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README NEWS AUTHORS ChangeLog doc/html
 %attr(755,root,root) %{_libdir}/libortp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libortp.so.5
+%attr(755,root,root) %ghost %{_libdir}/libortp.so.8
 
 %files devel
 %defattr(644,root,root,755)
