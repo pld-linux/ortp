@@ -8,6 +8,7 @@ Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
 # Source0-md5:	caa6bebf049629cdc05ef34b9d4ee5e1
 Patch0:		%{name}-i486.patch
+Patch1:		%{name}-Werror.patch
 URL:		http://www.linphone.org/index.php/eng/code_review/ortp
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -51,6 +52,7 @@ Statyczna biblioteka ortp.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
