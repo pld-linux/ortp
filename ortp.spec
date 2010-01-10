@@ -12,6 +12,7 @@ Patch1:		%{name}-Werror.patch
 URL:		http://www.linphone.org/index.php/eng/code_review/ortp
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	doxygen
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
