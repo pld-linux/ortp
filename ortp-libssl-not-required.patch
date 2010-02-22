@@ -1,0 +1,12 @@
+--- ortp-0.16.1/configure.ac~	2009-09-07 15:55:21.000000000 +0200
++++ ortp-0.16.1/configure.ac	2010-02-22 02:27:28.999527369 +0100
+@@ -255,8 +255,7 @@
+ 
+ AC_CHECK_HEADERS(openssl/hmac.h openssl/md5.h)
+ 
+-AC_CHECK_LIB(ssl,SSL_CTX_new,[SSL_LIBS="-lssl"])
+-AC_CHECK_LIB(crypto,MD5,[SSL_LIBS="$SSL_LIBS -lcrypto"])
++AC_CHECK_LIB(crypto,MD5,[SSL_LIBS="-lcrypto"])
+ 
+ AC_SUBST(SSL_LIBS)
+ 
