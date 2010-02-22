@@ -2,18 +2,20 @@ Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
 Version:	0.16.1
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
 # Source0-md5:	bc96cdcb9c139d366a720a94200f92dd
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-Werror.patch
+Patch2:		%{name}-libssl-not-required.patch
 URL:		http://www.linphone.org/index.php/eng/code_review/ortp
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	libtool
+BuildRequires:	openssl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing
@@ -31,6 +33,7 @@ Summary:	Header files to develop applications using ortp
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	openssl-devel
 
 %description devel
 Header files for the ortp library.
@@ -54,6 +57,7 @@ Statyczna biblioteka ortp.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
