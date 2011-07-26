@@ -1,12 +1,12 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.16.1
-Release:	3
+Version:	0.16.5
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	bc96cdcb9c139d366a720a94200f92dd
+# Source0-md5:	94546901d14b85f97342f4ecf39489b1
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-Werror.patch
 Patch2:		%{name}-libssl-not-required.patch
@@ -70,7 +70,8 @@ Statyczna biblioteka ortp.
 %else
 	--enable-mode64bit=no \
 %endif
-	--enable-ipv6
+	--enable-ipv6 \
+	--disable-strict
 %{__make}
 
 %install
