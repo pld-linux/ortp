@@ -5,8 +5,8 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.18.0
-Release:	2
+Version:	0.22.0
+Release:	1
 %if %{with zrtp}
 License:	GPL v3+
 %else
@@ -14,7 +14,7 @@ License:	LGPL v2.1+
 %endif
 Group:		Libraries
 Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	098e984f9325d9e2648bfd9863eed501
+# Source0-md5:	119357e1d904be0289e57c80e5ad90ba
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-libssl-not-required.patch
 URL:		http://www.linphone.org/eng/documentation/dev/ortp.html
@@ -93,7 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -103,9 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README TODO doc/html
 %attr(755,root,root) %{_libdir}/libortp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libortp.so.8
+%attr(755,root,root) %ghost %{_libdir}/libortp.so.9
 
 %files devel
 %defattr(644,root,root,755)
