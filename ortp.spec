@@ -24,6 +24,7 @@ BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2.0
 %{?with_zrtp:BuildRequires:	libzrtpcpp-devel >= 2.0.0}
 BuildRequires:	openssl-devel
+BuildRequires:	pkgconfig
 BuildRequires:	srtp-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -103,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO doc/html
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_libdir}/libortp.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libortp.so.9
 
