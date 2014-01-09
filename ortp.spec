@@ -6,7 +6,7 @@ Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
 Version:	0.22.0
-Release:	1
+Release:	2
 %if %{with zrtp}
 License:	GPL v3+
 %else
