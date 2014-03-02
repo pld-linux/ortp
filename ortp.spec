@@ -1,20 +1,17 @@
 #
 # Conditional build:
-%bcond_without	zrtp	# ZRTP (RFC 6189: Media Path Key Agreement for Unicast Secure RTP) support; GPL v3
+%bcond_without	zrtp	# ZRTP (RFC 6189: Media Path Key Agreement for Unicast Secure RTP) support
 #
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.22.0
-Release:	2
-%if %{with zrtp}
-License:	GPL v3+
-%else
+Version:	0.23.0
+Release:	1
 License:	LGPL v2.1+
-%endif
 Group:		Libraries
-Source0:	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	119357e1d904be0289e57c80e5ad90ba
+#Source0:	http://download.savannah.gnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
+Source0:	http://download.savannah.gnu.org/releases/linphone/ortp/%{name}-%{version}.tar.gz
+# Source0-md5:	fb833cc7a66ec1a0c1b75016130e7e6d
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-libssl-not-required.patch
 URL:		http://www.linphone.org/eng/documentation/dev/ortp.html
@@ -22,7 +19,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2.0
-%{?with_zrtp:BuildRequires:	libzrtpcpp-devel >= 2.0.0}
+%{?with_zrtp:BuildRequires:	libzrtpcpp-core-devel >= 4.0.0}
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	srtp-devel
@@ -41,7 +38,7 @@ Summary:	Header files to develop applications using ortp
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%{?with_zrtp:Requires:	libzrtpcpp-devel >= 2.0.0}
+%{?with_zrtp:Requires:	libzrtpcpp-core-devel >= 4.0.0}
 Requires:	openssl-devel
 Requires:	srtp-devel
 

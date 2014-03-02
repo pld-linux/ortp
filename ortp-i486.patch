@@ -1,11 +1,11 @@
---- ortp-0.16.5/src/stun.c~	2010-11-19 11:32:47.000000000 +0100
-+++ ortp-0.16.5/src/stun.c	2011-07-26 13:00:04.172190285 +0200
-@@ -1184,7 +1184,7 @@
- 		   read(fd,&tick,sizeof(tick));
- 		   closesocket(fd);
+--- ortp-0.23.0/src/stun.c.orig	2014-03-01 14:32:05.431008206 +0100
++++ ortp-0.23.0/src/stun.c	2014-03-01 14:33:23.847671582 +0100
+@@ -1234,7 +1234,7 @@
+ 			read(fd,&tick,sizeof(tick));
+ 			closesocket(fd);
  	   }
--#elif defined(__GNUC__) && ( defined(__i686__) || defined(__i386__) )
-+#elif defined(__GNUC__) && ( defined(__i686__) || defined(__i386__) || defined(__pentium4__) || defined(__athlon__) )
-       asm("rdtsc" : "=A" (tick));
- #elif defined(__GNUC__) && defined(__amd64__)
-       asm("rdtsc" : "=A" (tick));
+-#elif defined(__GNUC__) && ( defined(__i686__) || defined(__i386__) || defined(__amd64__) )
++#elif defined(__GNUC__) && ( defined(__i686__) || defined(__i386__) || defined(__pentium4__) || defined(__athlon__) || defined(__amd64__) )
+ 	  asm("rdtsc" : "=A" (tick));
+ #elif defined (__SUNPRO_CC) && defined( __sparc__ )
+ 	  tick = gethrtime();
