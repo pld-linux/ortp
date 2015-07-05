@@ -1,25 +1,22 @@
 #
 # Conditional build:
-%bcond_without	zrtp	# ZRTP (RFC 6189: Media Path Key Agreement for Unicast Secure RTP) support
+%bcond_without	static_libs	# Static library
 #
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.23.0
-Release:	2
+Version:	0.24.2
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-#Source0:	http://download.savannah.gnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-Source0:	http://download.savannah.gnu.org/releases/linphone/ortp/%{name}-%{version}.tar.gz
-# Source0-md5:	fb833cc7a66ec1a0c1b75016130e7e6d
-Patch0:		%{name}-i486.patch
-Patch1:		%{name}-libssl-not-required.patch
+Source0:	http://download.savannah.gnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
+# Source0-md5:	9eb17e1e79f25acb06bbacc06ad3958f
+Patch0:		%{name}-libssl-not-required.patch
 URL:		http://www.linphone.org/eng/documentation/dev/ortp.html
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2.0
-%{?with_zrtp:BuildRequires:	libzrtpcpp-core-devel >= 4.0.0}
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	srtp-devel
@@ -38,7 +35,6 @@ Summary:	Header files to develop applications using ortp
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%{?with_zrtp:Requires:	libzrtpcpp-core-devel >= 4.0.0}
 Requires:	openssl-devel
 Requires:	srtp-devel
 
@@ -63,7 +59,6 @@ Statyczna biblioteka ortp.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -74,14 +69,13 @@ Statyczna biblioteka ortp.
 %configure \
 	--disable-silent-rules \
 	--disable-strict \
-	--enable-ipv6 \
 %if "%{_lib}" == "lib64"
 	--enable-mode64bit=yes \
 %else
 	--enable-mode64bit=no \
 %endif
-	--enable-static \
-	%{?with_zrtp:--enable-zrtp}
+	--enable-ssl-hmac \
+	%{?with_static_libs:--enable-static}
 
 %{__make}
 
@@ -113,6 +107,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/ortp
 %{_pkgconfigdir}/ortp.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libortp.a
+%endif
