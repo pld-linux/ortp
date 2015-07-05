@@ -19,7 +19,6 @@ BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
-BuildRequires:	srtp-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing
@@ -36,7 +35,6 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	openssl-devel
-Requires:	srtp-devel
 
 %description devel
 Header files for the ortp library.
