@@ -5,16 +5,16 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	0.25.0
+Version:	1.0.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://download.savannah.gnu.org/releases/linphone/ortp/sources/%{name}-%{version}.tar.gz
-# Source0-md5:	f44b4ab2a8de32c19abfa584c4426f76
-Patch0:		%{name}-libssl-not-required.patch
+Source0:	https://linphone.org/releases/sources/ortp/%{name}-%{version}.tar.gz
+# Source0-md5:	82629e99befa578341e0bdc225924135
 URL:		http://www.linphone.org/eng/documentation/dev/ortp.html
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	bctoolbox-devel
 BuildRequires:	doxygen
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	openssl-devel
@@ -55,8 +55,7 @@ Static ortp library.
 Statyczna biblioteka ortp.
 
 %prep
-%setup -q
-%patch0 -p1
+%setup -q -n %{name}-%{version}-0
 
 %build
 %{__libtoolize}
@@ -83,8 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -93,9 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README.md
 %attr(755,root,root) %{_libdir}/libortp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libortp.so.10
+%attr(755,root,root) %ghost %{_libdir}/libortp.so.13
 
 %files devel
 %defattr(644,root,root,755)
