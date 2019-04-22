@@ -54,6 +54,20 @@ Static ortp library.
 %description static -l pl.UTF-8
 Statyczna biblioteka ortp.
 
+%package apidocs
+Summary:	API documentation for ortp library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki ortp
+Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description apidocs
+API documentation for ortp library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki ortp.
+
 %prep
 %setup -q -n %{name}-%{version}-0
 
@@ -82,6 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-1.0.1
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -96,7 +113,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/html/*
 %attr(755,root,root) %{_libdir}/libortp.so
 %{_libdir}/libortp.la
 %{_includedir}/ortp
@@ -107,3 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libortp.a
 %endif
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc doc/html/*
