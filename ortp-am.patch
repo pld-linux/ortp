@@ -1,0 +1,45 @@
+--- ortp-4.4.0/Makefile.am.orig	2020-06-15 19:23:39.000000000 +0200
++++ ortp-4.4.0/Makefile.am	2020-09-26 10:24:22.830791471 +0200
+@@ -38,7 +38,7 @@
+ pkgdocdir=$(docdir)/$(PACKAGE)-$(VERSION)
+ doc_htmldir=$(pkgdocdir)/html
+ 
+-pkgdoc_DATA = README.md AUTHORS ChangeLog COPYING
++pkgdoc_DATA = README.md AUTHORS.md CHANGELOG.md LICENSE.txt
+ doc_html_DATA = $(top_builddir)/doc/html/html.tar
+ 
+ $(top_builddir)/doc/html/html.tar: $(top_builddir)/doc/html/index.html
+--- ortp-4.4.0/src/Makefile.am.orig	2020-06-15 19:23:39.000000000 +0200
++++ ortp-4.4.0/src/Makefile.am	2020-09-26 10:36:44.623439502 +0200
+@@ -44,6 +44,7 @@
+ 			rtpsession_priv.h \
+ 			rtpsignaltable.c  \
+ 			rtptimer.c	rtptimer.h \
++			rtpbundle.cc \
+ 			scheduler.c scheduler.h \
+ 			sessionset.c  \
+ 			str_utils.c 	\
+--- ortp-4.4.0/configure.ac.orig	2020-06-15 19:23:39.000000000 +0200
++++ ortp-4.4.0/configure.ac	2020-09-26 10:37:42.769791163 +0200
+@@ -47,6 +47,7 @@
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
++AC_PROG_CXX
+ LT_INIT([win32-dll shared disable-static])
+ 
+ gl_LD_OUTPUT_DEF
+@@ -298,13 +299,6 @@
+ )
+ AM_CONDITIONAL(ENABLE_TESTS, test x$tests_enabled = xtrue)
+ 
+-case "$target_os" in
+-	*linux*)
+-		# Eliminate -lstdc++ addition to postdeps for cross compiles.
+-		postdeps_CXX=`echo " $postdeps_CXX " | sed 's, -lstdc++ ,,g'`
+-	;;
+-esac
+-
+ dnl ##################################################
+ dnl # Check for doxygen
+ dnl ##################################################

@@ -5,17 +5,20 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	1.0.2
+Version:	4.4.0
 Release:	1
-License:	LGPL v2.1+
+License:	GPL v3+
 Group:		Libraries
-Source0:	https://linphone.org/releases/sources/ortp/%{name}-%{version}.tar.gz
-# Source0-md5:	82629e99befa578341e0bdc225924135
-URL:		http://www.linphone.org/eng/documentation/dev/ortp.html
+#Source0Download: https://gitlab.linphone.org/BC/public/ortp/tags
+Source0:	https://gitlab.linphone.org/BC/public/ortp/-/archive/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	33df5f50a6ce40cc114c1393a30959b7
+Patch0:		%{name}-am.patch
+URL:		http://www.linphone.org/technical-corner/ortp
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	bctoolbox-devel
 BuildRequires:	doxygen
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.0
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
@@ -34,6 +37,7 @@ Summary:	Header files to develop applications using ortp
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libstdc++-devel
 Requires:	openssl-devel
 
 %description devel
@@ -58,7 +62,7 @@ Statyczna biblioteka ortp.
 Summary:	API documentation for ortp library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki ortp
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -69,7 +73,8 @@ API documentation for ortp library.
 Dokumentacja API biblioteki ortp.
 
 %prep
-%setup -q -n %{name}-%{version}-0
+%setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -96,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libortp.la
+
 # packaged as %doc
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-1.0.1
 
@@ -107,14 +115,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README.md
+%doc AUTHORS.md CHANGELOG.md README.md
 %attr(755,root,root) %{_libdir}/libortp.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libortp.so.13
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libortp.so
-%{_libdir}/libortp.la
 %{_includedir}/ortp
 %{_pkgconfigdir}/ortp.pc
 
