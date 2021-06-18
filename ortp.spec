@@ -5,13 +5,13 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	4.5.15
+Version:	4.5.20
 Release:	1
 License:	GPL v3+
 Group:		Libraries
 #Source0Download: https://gitlab.linphone.org/BC/public/ortp/tags
 Source0:	https://gitlab.linphone.org/BC/public/ortp/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	e03716372f79b5fdcd1c5e9c3918fcde
+# Source0-md5:	1fe62e2503eb17a427bf9d2306d2a755
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-pc.patch
 URL:		http://www.linphone.org/technical-corner/ortp
