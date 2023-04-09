@@ -5,13 +5,14 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	4.5.20
+# note: 5.2.x is AGPL-licensed; see DEVEL-5.2 branch
+Version:	5.1.72
 Release:	1
 License:	GPL v3+
 Group:		Libraries
 #Source0Download: https://gitlab.linphone.org/BC/public/ortp/tags
 Source0:	https://gitlab.linphone.org/BC/public/ortp/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	1fe62e2503eb17a427bf9d2306d2a755
+# Source0-md5:	4f6998df5aaa88d3bb538d7aede36686
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-pc.patch
 URL:		http://www.linphone.org/technical-corner/ortp
@@ -96,9 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # packaged as %doc
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-.
-# packaged as %doc in -apidocs
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-4.5.0
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-5.1.0
 
 # disable completeness check incompatible with split packaging
 %{__sed} -i -e '/^foreach(target .*IMPORT_CHECK_TARGETS/,/^endforeach/d; /^unset(_IMPORT_CHECK_TARGETS)/d' $RPM_BUILD_ROOT%{_libdir}/cmake/ortp/ortpTargets.cmake
