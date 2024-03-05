@@ -1,30 +1,29 @@
 #
 # Conditional build:
-%bcond_without	static_libs	# Static library
+%bcond_without	static_libs	# static library
 #
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-# note: 5.2.x is AGPL-licensed; see DEVEL-5.2 branch
-Version:	5.2.109
+Version:	5.3.26
 Release:	1
-License:	GPL v3+
+License:	AGPL v3+
 Group:		Libraries
 #Source0Download: https://gitlab.linphone.org/BC/public/ortp/tags
 Source0:	https://gitlab.linphone.org/BC/public/ortp/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	d5b1d0ef5a6fa50d73ce2180caee0777
+# Source0-md5:	384a2fe3fa561abf44f8cb75a6e2209e
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-pc.patch
-URL:		http://www.linphone.org/technical-corner/ortp
-BuildRequires:	bctoolbox-devel >= 0.2.0
-BuildRequires:	cmake >= 3.1
+URL:		https://www.linphone.org/technical-corner/mediastreamer2-ortp
+BuildRequires:	bctoolbox-devel >= 5.3.0
+BuildRequires:	cmake >= 3.22
 BuildRequires:	doxygen
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
-Requires:	bctoolbox >= 0.2.0
+Requires:	bctoolbox >= 5.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing
@@ -40,8 +39,8 @@ Summary:	Header files to develop applications using ortp
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia aplikacji używających ortp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	bctoolbox-devel >= 0.2.0
-Requires:	libstdc++-devel
+Requires:	bctoolbox-devel >= 5.3.0
+Requires:	libstdc++-devel >= 6:7
 Requires:	openssl-devel
 
 %description devel
@@ -83,24 +82,34 @@ Dokumentacja API biblioteki ortp.
 # use cmake instead of autotools:
 # - to get cmake target files for other linphone projects
 # - configure.ac seems outdated (version 1.0.1, soname 13)
-install -d build
-cd build
-%cmake .. \
-	%{!?with_static_libs:-DENABLE_STATIC=NO} \
-	-DENABLE_STRICT=NO
-%{__make}
+%if %{with static_libs}
+%cmake -B builddir-static \
+	-DBUILD_SHARED_LIBS=OFF \
+	-DENABLE_DOC=OFF \
+	-DENABLE_STRICT=OFF \
+	-DENABLE_UNIT_TESTS=OFF
+
+%{__make} -C builddir-static
+%endif
+
+%cmake -B builddir \
+	-DENABLE_STRICT=OFF
+
+%{__make} -C builddir
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C build install \
+%if %{with static_libs}
+%{__make} -C builddir-static install \
+	DESTDIR=$RPM_BUILD_ROOT
+%endif
+
+%{__make} -C builddir install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # packaged as %doc
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-5.2.0
-
-# disable completeness check incompatible with split packaging
-%{__sed} -i -e '/^foreach(target .*IMPORT_CHECK_TARGETS/,/^endforeach/d; /^unset(_IMPORT_CHECK_TARGETS)/d' $RPM_BUILD_ROOT%{_libdir}/cmake/ortp/ortpTargets.cmake
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/ortp-5.3.0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -115,10 +124,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/ortp-tester
 %attr(755,root,root) %{_libdir}/libortp.so
 %{_includedir}/ortp
+%{_datadir}/ortp-tester
 %{_pkgconfigdir}/ortp.pc
-%{_libdir}/cmake/ortp
+%dir %{_datadir}/Ortp
+%{_datadir}/Ortp/cmake
 
 %if %{with static_libs}
 %files static
@@ -128,4 +140,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files apidocs
 %defattr(644,root,root,755)
-%doc build/doc/html/*.{css,html,js,png}
+%doc builddir/doc/html/*.{css,html,js,png}

@@ -1,6 +1,6 @@
---- ortp-5.1.72/CMakeLists.txt.orig	2023-04-09 21:59:31.773752891 +0200
-+++ ortp-5.1.72/CMakeLists.txt	2023-04-09 22:00:07.306893725 +0200
-@@ -203,11 +203,11 @@ endif()
+--- ortp-5.3.26/CMakeLists.txt.orig	2024-03-05 20:57:39.456281602 +0100
++++ ortp-5.3.26/CMakeLists.txt	2024-03-05 20:59:43.555609298 +0100
+@@ -198,11 +198,11 @@ endif()
  
  
  set(prefix ${CMAKE_INSTALL_PREFIX})
@@ -13,5 +13,5 @@
 -set(ORTPDEPS_LIBS )
 +set(ORTPDEPS_LIBS -lbctoolbox)
  
- configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ortp.pc.in ${CMAKE_CURRENT_BINARY_DIR}/ortp.pc)
- install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ortp.pc DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+ configure_file(${PROJECT_SOURCE_DIR}/ortp.pc.in ${PROJECT_BINARY_DIR}/ortp.pc)
+ install(FILES ${PROJECT_BINARY_DIR}/ortp.pc DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
