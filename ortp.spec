@@ -5,13 +5,13 @@
 Summary:	RTP/RTCP protocol library
 Summary(pl.UTF-8):	Biblioteka obsługująca protokół RTP/RTCP
 Name:		ortp
-Version:	5.3.26
+Version:	5.3.38
 Release:	1
 License:	AGPL v3+
 Group:		Libraries
 #Source0Download: https://gitlab.linphone.org/BC/public/ortp/tags
 Source0:	https://gitlab.linphone.org/BC/public/ortp/-/archive/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	384a2fe3fa561abf44f8cb75a6e2209e
+# Source0-md5:	80c373d7e4c7f4fb2b5cc90e891ca979
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-pc.patch
 URL:		https://www.linphone.org/technical-corner/mediastreamer2-ortp
